@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Index Page{% endblock %}
+
+{% block content %}
+    <h1>TO DO LIST</h1>
+    <form action = "/create" method = "POST">
+        <input type = "text" name = "description" required>
+        <button type = "submit">Add</button>
+    </form>
+    <h1>Task list</h1>
+    <ol>
+        {% for task in tasks %}
+        <li>
+            <form action = "/update/{{ task.taskid }}" method = "POST" style = "display: inline;">
+                <input type = "text" name = "description" value = "{{ task.description }}">
+                <button type = "submit">Update</button>
+            </form>
+            <form action = "/delete/{{ task.taskid }}" method = "POST" style = "display: inline;">
+                <button type = "submit">Remove</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ol>
+{% endblock %}
